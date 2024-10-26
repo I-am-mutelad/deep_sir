@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 Happy Birthday, Sir 🎉</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  
+    <style>
+        body {
+            margin: 0;
+            /*background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(50,50,50,1) 100%);*/
+            cursor: crosshair;
+            color: #fff;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            text-align: center;
+            overflow-x: hidden;
+            animation: background-animation 30s ease-in-out infinite;
+            overflow-y: auto; /* Enable vertical scrolling */
+
+            /*-----------------*/
+            
+            background: #000;
+            
+        }
+
+        html, body{
+            height: 100%;
+        }
+
+
+    @keyframes background-animation {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    #content {
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    #bdayPerson {
+        margin-top: 20px;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        display: inline-block;
+    }
+
+    #bdayPerson:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    }
+
+    #greeting {
+        margin-top: 20px;
+        opacity: 0;
+        animation: fade-in 2s ease-in-out forwards;
+    }
+
+    @keyframes fade-in {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+
+
+    h1 {
+        font-size: 2.5em;
+        font-weight: 900;
+        margin-bottom: 20px;
+        color: #FFD700;
+        text-shadow: 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700;
+        animation: glow 2s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+        0% { text-shadow: 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700; }
+        50% { text-shadow: 0 0 40px #FF6347, 0 0 60px #FF6347, 0 0 80px #FF6347; }
+        100% { text-shadow: 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700; }
+    }
+
+    #bdayPerson img {
+        border-radius: 10px;
+        border: 2px solid transparent;
+        animation: borderAnimation 10s infinite alternate;
+        max-width: 100%;
+        height: auto;
+    }
+
+    @keyframes borderAnimation {
+        0% { border-color: rgb(255, 0, 0); }
+        25% { border-color: rgb(0, 255, 0); }
+        50% { border-color: rgb(0, 0, 255); }
+        75% { border-color: rgb(255, 255, 0); }
+        100% { border-color: rgb(255, 0, 255); }
+    }
+
+
+
+    p {
+        font-size: 1.2em;
+        line-height: 1.6em;
+        margin: 10px 0;
+    }
+
+    @media (min-width: 768px) {
+        h1 {
+            font-size: 5em;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 2em;
+        }
+
+        #bdayPerson img {
+            width: 80%;
+            height: auto;
+        }
+
+        p {
+            font-size: 0.9em;
+        }
+
+        #bdayFooter {
+            font-size: 14px;
+            padding: 6px 12px;
+        }
+    }
+
+    /*------Box-Canvas-----*/
+    #heroCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        #loadingMessage {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: Arial, sans-serif;
+            z-index: 2;
+        }
+    /*-----------------*/
+
+    /*--------------Form-CSS-------------*/
+    .wishes-section {
+    min-height: 100vh;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #0a192f, #ff6b6b);
+}
+
+.wishes-form {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    transform-style: preserve-3d;
+    transition: all 0.5s ease;
+}
+
+.wishes-form:hover {
+    transform: translateZ(20px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+input, textarea {
+    width: 100%;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #ff6b6b;
+    box-shadow: 0 0 10px rgba(255,107,107,0.3);
+}
+
+.submit-btn {
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.5s;
+}
+
+.submit-btn:hover::before {
+    left: 100%;
+}
+
+/* Loading animation for button */
+.button-loader {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Success message styling */
+.success-message {
+    background: rgba(46, 213, 115, 0.2);
+    color: #2ed573;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.success-message.show {
+    opacity: 1;
+}
+    /*------------------------------*/
+
+/*----------------------Gallery section-----------------------------*/
+.gallery-section {
+    min-height: 100vh;
+    background: linear-gradient(45deg, #0a192f 0%, #112240 100%);
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery-title {
+    text-align: center;
+    color: #FFD700;
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    animation: titlePulse 2s infinite;
+}
+
+@keyframes titlePulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    position: relative;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-10px) rotateY(10deg);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    border-radius: 9;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7));
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-text {
+    color: white;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-text {
+    transform: translateY(0);
+}
+
+/* Modal Styles */
+.gallery-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90vh;
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(255,255,255,0.1);
+}
+
+.modal-close {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 10px;
+}
+
+.modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    background: rgba(0,0,0,0.5);
+    border: none;
+    padding: 20px;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.modal-prev {
+    left: 20px;
+}
+
+.modal-next {
+    right: 20px;
+}
+
+.modal-nav:hover {
+    background: rgba(0,0,0,0.8);
+}
+
+/* Floating particles animation */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(255, 215, 0, 0.2);
+    border-radius: 50%;
+    animation: float 15s infinite linear;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+/*-------------------------------------------------*/
+
+/*------------Main Title---------------------*/
+    .hero {
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    #heroCanvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        transform-style: preserve-3d;
+    }
+
+    .main-title {
+        font-size: 5rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        background: linear-gradient(45deg, #ff007f, #ffdd00, #00c3ff, #ff007f);
+        background-size: 200%;
+        -webkit-background-clip: text;
+        color: transparent;
+        animation: gradientShift 4s ease-in-out infinite;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Animation to make the gradient shift */
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 100% 50%; }
+    }
+
+/*--------------------------------*/
+
+
+/*---------------------Footer-------------------------------*/
+@keyframes slideUp {
+      from { 
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to { 
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    .footer-container {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      animation: slideUp 0.8s ease-out;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .message {
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .heart {
+      color: #ff4d6d;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .social-icon {
+      color: white;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+      opacity: 0.8;
+    }
+
+    .social-icon:hover {
+      opacity: 1;
+      transform: translateY(-3px);
+    }
+
+    .instagram:hover { color: #E1306C; }
+    .facebook:hover { color: #4267B2; }
+    .linkedin:hover { color: #0077b5; }
+    .github:hover { color: #6e5494; }
+
+    @media (max-width: 768px) {
+      .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .message {
+        font-size: 1rem;
+      }
+
+      .social-icons {
+        justify-content: center;
+      }
+    }
+
+</style>
+</head>
+<body>
+    <!---
+    <div id="loadingMessage">Loading...</div>
+    <canvas id="heroCanvas"></canvas>
+    -->
+    
+    
+    <div id="content">
+
+        <div class="hero">
+            <canvas id="heroCanvas"></canvas>
+            <div class="hero-content">
+                <h1 class="main-title">Happy Birthday<br>Sir</h1>
+            </div>
+        </div>
+
+        <canvas id="birthday"></canvas>
+        <div id="bdayPerson"><img src="/bd.png" alt="Birthday Person" height="200", width="190"></div>
+        <div id="greeting">
+            <p>Dear Sir,</p>
+            <p>On this special day, we celebrate not only your birthday but the incredible light and wisdom you bring into our lives. You have been more than just a teacher to us; you’ve been a guide, a mentor, and an inspiration. Your dedication, knowledge, and unwavering support have transformed our learning journey into a memorable experience.</p>
+            <p>From your start as a Site Engineer to your journey as an Assistant Professor, your career has shown us the value of hard work and dedication. Your story motivates us to persevere, strive for excellence, and pursue our dreams wholeheartedly. The commitment you've shown, from AMTRON to ADP College, is a testament to your passion for teaching and empowering others.</p>
+            <p>Thank you for your kindness, patience, and guidance. Your passion for education has ignited the same fire in us, and we feel so grateful to learn from someone with such depth of knowledge and integrity.</p>
+            <p>Wishing you a year filled with joy, health, and fulfillment in every aspect of your life. May this day be as special as the impact you've made on all of us.</p>
+           <p>Happy Birthday, Sir! 🎉</p>
+            <br>
+            <br>
+            <br>
+            <br>
+
+            
+        </div>
+    </div>
+
+<!-----------------------Gallery--------------------->
+<section class="gallery-section">
+    <h2 class="gallery-title">✨ Memories Through The Years ✨</h2>
+    <div class="gallery-container">
+        <!-- Gallery items with custom width and height -->
+        <div class="gallery-item">
+            <img src="/m1.jpg" alt="Birthday Memory 1" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #1</div>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <img src="/m2.jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="/m3.jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="/m31.jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="/m4.jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="/m5.jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="/m71.jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="/m6.jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="/m7.jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="/m8.jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <img src="/m81.jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <img src="/m9.jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <img src="/m10.jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <img src="/m11.jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <img src="/m12.jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <img src="/m13.jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="/m14 (2).jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div> <div class="gallery-item">
+            <img src="/m14.jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div> <div class="gallery-item">
+            <img src="/m15 (2).jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div> <div class="gallery-item">
+            <img src="/m15.jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+            <div class="gallery-overlay">
+                <div class="gallery-text">Memory #2</div>
+            </div>
+        </div>
+
+    </div> <div class="gallery-item">
+        <img src="/m16.jpg" alt="Birthday Memory 2" style="width: 250px; height: 300px;">
+        <div class="gallery-overlay">
+            <div class="gallery-text">Memory #2</div>
+        </div>
+    </div>
+
+        <!-- Add more images with specific styles as needed -->
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="gallery-modal" id="galleryModal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-content">
+        <img src="" alt="" class="modal-image" id="modalImage">
+    </div>
+</div>
+
+<!--------------------------------------------------->
+
+<!----Form-------------------------------->
+<section class="wishes-section">
+    <div class="wishes-form">
+        <h2>Share Your Birthday Wishes</h2>
+        <form id="wishesForm" method="post" onsubmit="handleSubmit(event)">
+            <input type="text" name="name" id="name" placeholder="Your Name" required>
+            <textarea name="message" id="message" placeholder="Write your birthday message..." rows="4" required></textarea>
+            <button name="submit-btn" type="submit" class="submit-btn">
+                Send Wishes ❤️
+                
+                <div class="button-loader"></div>
+            </button>
+        </form>
+    </div>
+    <div id="wishes-container"></div>
+    <!-- Hidden audio element -->
+    <audio id="thankYouSound" src="/Thanku.mp3"></audio>
+</section>
+
+<!---------------------------------------->
+
+<footer class="footer-container">
+    <div class="footer-content">
+      <div class="message">
+        Crafted with <span class="heart">❤️</span> wishes for you by Mutelad! 
+        <span>🎈 🎁 🎊</span>
+      </div>
+      
+      <div class="social-icons">
+        <a href="https://www.instagram.com/parthabhuyan1/" class="social-icon instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/parthbhuyan1/" class="social-icon facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/parthabhuyan1/" class="social-icon linkedin">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/parthabhuyan1/" class="social-icon github">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+  
+
+
+
+<!---Add online Fire cracker sound clip -->
+<audio id="myAudio" autoplay loop style="display: none;">
+    <source src="/shot.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Load Three.js from CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+    const PI2 = Math.PI * 2;
+    const random = (min, max) => Math.random() * (max - min + 1) + min | 0;
+    const timestamp = () => new Date().getTime();
+
+    class Birthday {
+        constructor() {
+            this.resize();
+            this.fireworks = [];
+            this.counter = 0;
+        }
+
+        resize() {
+            this.width = canvas.width = window.innerWidth;
+            this.height = canvas.height = window.innerHeight;
+            this.spawnA = this.width / 4;
+            this.spawnB = this.width / 1.5;
+            this.spawnC = this.height * 0.1;
+            this.spawnD = this.height * 0.5;
+        }
+
+        onClick(evt) {
+            const x = evt.clientX || evt.touches && evt.touches[0].pageX;
+            const y = evt.clientY || evt.touches && evt.touches[0].pageY;
+            const count = random(3, 5);
+
+            for (let i = 0; i < count; i++) {
+                this.fireworks.push(new Firework(
+                    random(this.spawnA, this.spawnB),
+                    this.height,
+                    x,
+                    y,
+                    random(0, 260),
+                    random(30, 110)
+                ));
+            }
+
+            this.counter = -1;
+        }
+
+        update(delta) {
+            ctx.globalCompositeOperation = 'hard-light';
+            ctx.fillStyle = `rgba(20,20,20,${7 * delta})`;
+            ctx.fillRect(0, 0, this.width, this.height);
+
+            ctx.globalCompositeOperation = 'lighter';
+            for (let firework of this.fireworks) firework.update(delta);
+
+            this.counter += delta * 3;
+            if (this.counter >= 1) {
+                this.fireworks.push(new Firework(
+                    random(this.spawnA, this.spawnB),
+                    this.height,
+                    random(0, this.width),
+                    random(this.spawnC, this.spawnD),
+                    random(0, 360),
+                    random(30, 110)
+                ));
+                this.counter = 0;
+            }
+
+            if (this.fireworks.length > 2000) this.fireworks = this.fireworks.filter(firework => !firework.dead);
+        }
+    }
+
+    class Firework {
+        constructor(x, y, targetX, targetY, shade, offsprings) {
+            this.dead = false;
+            this.offsprings = offsprings;
+            this.x = x;
+            this.y = y;
+            this.targetX = targetX;
+            this.targetY = targetY;
+            this.shade = shade;
+            this.history = [];
+        }
+
+        update(delta) {
+            if (this.dead) return;
+
+            const xDiff = this.targetX - this.x;
+            const yDiff = this.targetY - this.y;
+            if (Math.abs(xDiff) > 3 || Math.abs(yDiff) > 3) {
+                this.x += xDiff * 2 * delta;
+                this.y += yDiff * 2 * delta;
+
+                this.history.push({ x: this.x, y: this.y });
+                if (this.history.length > 20) this.history.shift();
+            } else {
+                if (this.offsprings && !this.madeChilds) {
+                    const babies = this.offsprings / 2;
+                    for (let i = 0; i < babies; i++) {
+                        const targetX = this.x + this.offsprings * Math.cos(PI2 * i / babies) | 0;
+                        const targetY = this.y + this.offsprings * Math.sin(PI2 * i / babies) | 0;
+
+                        birthday.fireworks.push(new Firework(this.x, this.y, targetX, targetY, this.shade, 0));
+                    }
+                }
+                this.madeChilds = true;
+                this.history.shift();
+            }
+
+            if (this.history.length === 0) this.dead = true;
+            else if (this.offsprings) {
+                for (let i = 0; this.history.length > i; i++) {
+                    const point = this.history[i];
+                    ctx.beginPath();
+                    ctx.fillStyle = `hsl(${this.shade},100%,${i}%)`;
+                    ctx.arc(point.x, point.y, 1, 0, PI2, false);
+                    ctx.fill();
+                }
+            } else {
+                ctx.beginPath();
+                ctx.fillStyle = `hsl(${this.shade},100%,50%)`;
+                ctx.arc(this.x, this.y, 1, 0, PI2, false);
+                ctx.fill();
+            }
+        }
+    }
+
+    const canvas = document.getElementById('birthday');
+    const ctx = canvas.getContext('2d');
+
+    let then = timestamp();
+
+    const birthday = new Birthday();
+    window.onresize = () => birthday.resize();
+    document.onclick = evt => birthday.onClick(evt);
+    document.ontouchstart = evt => birthday.onClick(evt);
+
+    (function loop() {
+        requestAnimationFrame(loop);
+
+        const now = timestamp();
+        const delta = now - then;
+
+        then = now;
+        birthday.update(delta / 1000);
+    })();
+
+
+//-----------For Canva//
+// Wait for DOM and Three.js to load
+window.addEventListener('DOMContentLoaded', () => {
+            if (typeof THREE === 'undefined') {
+                document.getElementById('loadingMessage').textContent = 'Error: Three.js failed to load';
+                return;
+            }
+
+            try {
+                init();
+            } catch (error) {
+                console.error('Initialization error:', error);
+                document.getElementById('loadingMessage').textContent = 'Error initializing animation';
+            }
+        });
+
+        function init() {
+            // Remove loading message
+            const loadingMessage = document.getElementById('loadingMessage');
+            loadingMessage.style.display = 'none';
+
+            // Scene setup
+            const scene = new THREE.Scene();
+            
+            // Camera setup with dynamic aspect ratio
+            const camera = new THREE.PerspectiveCamera(
+                75,
+                window.innerWidth / window.innerHeight,
+                0.1,
+                1000
+            );
+            camera.position.z = 500;
+
+            // Renderer setup
+            const canvas = document.getElementById('heroCanvas');
+            const renderer = new THREE.WebGLRenderer({
+                canvas,
+                antialias: true,
+                alpha: true
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            // Create particles
+            const particleGeometry = new THREE.BufferGeometry();
+            const particleCount = 5000;
+            const positions = new Float32Array(particleCount * 3);
+
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 1000;     // x
+                positions[i + 1] = (Math.random() - 0.5) * 1000; // y
+                positions[i + 2] = (Math.random() - 0.5) * 1000; // z
+            }
+
+            particleGeometry.setAttribute(
+                'position',
+                new THREE.BufferAttribute(positions, 3)
+            );
+
+            // Create particle material
+            const particleMaterial = new THREE.PointsMaterial({
+                color: 0xffffff,
+                size: 2,
+                transparent: true,
+                opacity: 0.8,
+                sizeAttenuation: true
+            });
+
+            // Create particle system
+            const particleSystem = new THREE.Points(particleGeometry, particleMaterial);
+            scene.add(particleSystem);
+
+            // Animation function
+            function animate() {
+                requestAnimationFrame(animate);
+
+                particleSystem.rotation.x += 0.0005;
+                particleSystem.rotation.y += 0.0005;
+
+                renderer.render(scene, camera);
+            }
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            // Start animation
+            animate();
+        }
+//----------------------------//
+
+//---------------From-JS---------------------//
+
+let url = "https://script.google.com/macros/s/AKfycbwhZf9KtDBmxwSt42Vbg_H73-PUDHrmBA8632isq90pRpkcFSfNY90tQaXWvR1meVLV/exec"
+
+let form = document.querySelector("#wishesForm");
+const submitBtn = form.querySelector("[type='submit']");
+const thankYouSound = document.getElementById("thankYouSound");
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    submitBtn.textContent = "Thank you for your wishes! ❤️"; // Change button text
+    submitBtn.disabled = true; // Optionally disable button while submitting
+    
+    let d = new FormData(form);
+    fetch(url, {
+        method: "POST",
+        body: d
+    })
+    .then((res) => res.text())
+    .then((finalRes) => {
+        submitBtn.textContent = "Send Wishes ❤️"; // Reset button text
+        submitBtn.disabled = false; // Re-enable button
+        
+        // Play the thank you sound
+        thankYouSound.currentTime = 0; // Reset to the beginning
+        thankYouSound.play(); // Play the sound
+        console.log(finalRes);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        submitBtn.textContent = "Send Wishes ❤️"; // Reset button text on error too
+        submitBtn.disabled = false; // Re-enable button on error
+    });
+});
+
+/*
+// Replace with your Google Apps Script Web App URL
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyuUPW6V-zqjAT3LFkwHfcpOWe63bbnF8sy2NbLJtBMMHjaHt7nub4OlOkMIBbOy2IfJQ/exec';
+
+async function handleSubmit(event) {
+    event.preventDefault();
+    
+    const submitBtn = document.querySelector('.submit-btn');
+    const loader = document.querySelector('.button-loader');
+    const form = document.getElementById('wishesForm');
+    
+    // Get form data
+    const name = document.getElementById('name').value.trim();
+    const message = document.getElementById('message').value.trim();
+    
+    if (!name || !message) {
+        alert('Please fill in all fields');
+        return;
+    }
+
+    try {
+        // Show loading state
+        submitBtn.disabled = true;
+        loader.style.display = 'block';
+        
+        // Prepare form data
+        const data = {
+            name: name,
+            message: message,
+            timestamp: new Date().toISOString()
+        };
+
+        // Send data to Google Sheets
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            // Create and animate new wish card
+            createWishCard(name, message);
+            
+            // Show success message
+            showSuccessMessage();
+            
+            // Clear form
+            form.reset();
+        } else {
+            throw new Error(result.message || 'Failed to submit');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to submit your wish. Please try again.');
+    } finally {
+        // Reset button state
+        submitBtn.disabled = false;
+        loader.style.display = 'none';
+    }
+}
+
+function createWishCard(name, message) {
+    const wishCard = document.createElement('div');
+    wishCard.className = 'memory-card';
+    wishCard.innerHTML = `
+        <h3>${name}</h3>
+        <p>${message}</p>
+    `;
+    
+    document.getElementById('wishes-container').insertBefore(wishCard, document.getElementById('wishes-container').firstChild);
+}
+
+function showSuccessMessage() {
+    // Remove existing success message if any
+    const existingMessage = document.querySelector('.success-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+
+    // Create new success message
+    const successMessage = document.createElement('div');
+    successMessage.className = 'success-message';
+    successMessage.textContent = 'Thank you for your wishes! ❤️';
+    
+    // Insert after form
+    document.querySelector('.wishes-form').appendChild(successMessage);
+    
+    // Remove message after 3 seconds
+    setTimeout(() => {
+        successMessage.remove();
+    }, 3000);
+}
+    */
+
+
+//-----------------------------------------------//
+
+//---------Gellary-----------------------------//
+const images = [
+    '/m1.jpg', '/m2.jpg', 'images/photo3.jpg', // Add more image paths as needed
+];
+let currentImageIndex = 0;
+
+function openModal(index) {
+    currentImageIndex = index;
+    const modal = document.getElementById('galleryModal');
+    const modalImage = document.getElementById('modalImage');
+    modalImage.src = images[currentImageIndex];
+    modal.style.display = 'flex';
+}
+
+function closeModal() {
+    const modal = document.getElementById('galleryModal');
+    modal.style.display = 'none';
+}
+
+// Event listeners for modal navigation
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+});
+//-----------------------------------------------//
+
+/*----------------------Fire Craker sound--------------*/
+const audio = document.getElementById('myAudio');
+
+    // Play the audio
+    audio.play();
+
+    // Stop the audio after 15 seconds
+    setTimeout(() => {
+        audio.pause();
+        audio.currentTime = 0; // Reset the audio to the beginning
+    }, 15000);
+
+    //----------------------------------------------//
+
+</script>
+</body>
+</html>
